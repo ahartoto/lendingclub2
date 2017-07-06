@@ -9,10 +9,17 @@ Interface enums:
 """
 
 # Standard libraries
+import os
 from enum import Enum
 
 
 # Constants
+API_KEY_ENV = 'LENDING_CLUB_API_KEY'
+API_VERSION = 'v1'
+
+CONFIG_FPATH = os.path.expanduser(os.path.join('~', '.lendingclub'))
+CONFIG_FPATH_ENV = 'LENDING_CLUB_CONFIG'
+
 DNS = 'https://api.lendingclub.com'
 
 ENDPOINTS = {
