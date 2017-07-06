@@ -39,7 +39,7 @@ REQUEST_LIMIT_PER_SEC = 1
 # Interface enums
 class ResponseCode(Enum):
     """
-    
+    Enum of the Lending Club response code for a request
     """
     SUCCESSFUL = 200
     ERROR = 400
@@ -50,7 +50,7 @@ class ResponseCode(Enum):
 
 class TransferFrequency(Enum):
     """
-    
+    Enum for transfer frequency to the account
     """
     NOW = "LOAD_NOW"
     ONCE = "LOAD_ONCE"
