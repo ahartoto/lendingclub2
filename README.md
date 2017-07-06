@@ -1,0 +1,3 @@
+# Lending Club API
+
+To help automating the tasks on LendingClub...
