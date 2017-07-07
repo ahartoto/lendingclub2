@@ -19,7 +19,7 @@ from lendingclub2.error import LCError
 class TestListing(object):
     def test_search(self):
         try:
-            _ = Authorization.key
+            _ = Authorization().key
         except LCError:
             pytest.skip("skip test: cannot find authorization key")
 

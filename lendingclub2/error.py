@@ -45,3 +45,4 @@ class LCError(Exception):
         if self.details is not None:
             message.append("[=== Details ===]")
             message.append(self.details)
+        return "\n".join(message)
