@@ -70,10 +70,11 @@ def cancel(investor_id, *transaction_ids):
 
     :param investor_id: int - the investor account id
     :param transaction_ids: iterable of int
-    :returns: instance of lendingclub2.response.Response
+    :returns: instance of lendingclub2.response.Response if successful,
+              None if nothing to cancel
     """
     if not transaction_ids:
-        return
+        return None
 
     url = DNS + ENDPOINTS['cancel_transfer'].format(
         version=API_VERSION, investor_id=investor_id)

@@ -12,7 +12,6 @@ class Response(object):
     """
     def __init__(self, response):
         self._response = response
-        self._status_code = response.status_code
         self._json = response.json()
 
     @property
@@ -40,7 +39,7 @@ class Response(object):
 
         :returns: int
         """
-        return self._status_code
+        return self._response.status_code
 
     @property
     def successful(self):
