@@ -12,10 +12,10 @@ import random
 import pytest
 
 # lendingclub2
+from lendingclub2 import filter
 from lendingclub2 import loan
 from lendingclub2.authorization import Authorization
 from lendingclub2.error import LCError
-from lendingclub2.filter import FilterByGrade
 
 
 class TestListing(object):
@@ -30,8 +30,21 @@ class TestListing(object):
         assert isinstance(listing.loans, collections.Iterable)
 
         grade = random.choice('ABCDE')
-        loans = listing.filter(FilterByGrade(grade))
+        loans = listing.filter(filter.FilterByGrade(grade))
         assert isinstance(loans, collections.Iterable)
         assert len(loans) >= 0
         for selected_loan in loans:
             assert selected_loan.grade == grade
+
+        term = 36
+        loans = listing.filter(filter.FilterByTerm(value=term))
+        assert len(loans) >= 0
+        for selected_loan in loans:
+            assert selected_loan.term == term
+
+        # Chain the filters
+        loans = listing.filter(filter.FilterByGrade(grade),
+                               filter.FilterByTerm(value=term))
+        new_loans = listing.filter(filter.FilterByGrade(grade)).filter(
+            filter.FilterByTerm(value=term))
+        assert loans == new_loans

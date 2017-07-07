@@ -43,7 +43,7 @@ class Loan(object):
 
         :returns: string
         """
-        template = "Loan(id={}, amount={}, funded={:.2f}%, term={}," \
+        template = "Loan(id={}, amount={:.2f}, funded={:.2f}%, term={}," \
                    " grade={})".format(
                        self.id, self.amount, self.percent_funded * 100,
                        self.term, self.subgrade)
@@ -87,23 +87,73 @@ class Listing(object):
         """
         self.loans = list()
 
+    def __copy__(self):
+        """
+        Shallow copy of the listing
+
+        :returns: instance of lendingclub2.loan.Listing
+        """
+        new_listing = Listing()
+        new_listing.loans = list(self.loans)
+        return new_listing
+
+    def __eq__(self, other):
+        """
+        Check if two listings are equal
+
+        :param other: instance of lendingclub2.loan.Listing
+        :returns: boolean
+        """
+        return self.loans == other.loans
+
+    def __iter__(self):
+        """
+        Get an iterable version of the listing
+
+        :returns: an iterable
+        """
+        return self.loans.__iter__()
+
+    def __len__(self):
+        """
+        Get the length of loans in the listing
+
+        :returns: int
+        """
+        return len(self.loans)
+
+    def copy(self):
+        """
+        Get a shallow copy of the listing
+
+        :returns: instance of lendingclub2.loan.Listing
+        """
+        return self.__copy__()
+
     def filter(self, *filters):
         """
-        Apply filters to the search that we had found before
+        Apply all filters to the search that we had found before.
+        If multiple filters are specified, the loan has to meet all the
+        criteria to be included in the result.
 
         :param filters: iterable of lendingclub2.filter.Filter
-        :returns: an iterable of lendingclub2.loan.Loan
+        :returns: an instance of lendingclub2.loan.Listing
         """
         if not filters:
-            return list(self.loans)
+            return self.copy()
 
         filtered = list()
         for loan in self.loans:
+            meet_spec = True
             for filter_spec in filters:
-                if filter_spec.meet_requirement(loan):
-                    filtered.append(loan)
+                if not filter_spec.meet_requirement(loan):
+                    meet_spec = False
                     break
-        return filtered
+            if meet_spec:
+                filtered.append(loan)
+        new_listing = Listing()
+        new_listing.loans = filtered
+        return new_listing
 
     def search(self, filter_id=None, show_all=None):
         """
