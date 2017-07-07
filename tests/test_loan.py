@@ -6,6 +6,7 @@ Test the lendingclub2.loan module
 
 # Standard libraries
 import collections
+import random
 
 # PyTest
 import pytest
@@ -14,6 +15,7 @@ import pytest
 from lendingclub2 import loan
 from lendingclub2.authorization import Authorization
 from lendingclub2.error import LCError
+from lendingclub2.filter import FilterByGrade
 
 
 class TestListing(object):
@@ -26,3 +28,10 @@ class TestListing(object):
         listing = loan.Listing()
         listing.search()
         assert isinstance(listing.loans, collections.Iterable)
+
+        grade = random.choice('ABCDE')
+        loans = listing.filter(FilterByGrade(grade))
+        assert isinstance(loans, collections.Iterable)
+        assert len(loans) >= 0
+        for selected_loan in loans:
+            assert selected_loan.grade == grade

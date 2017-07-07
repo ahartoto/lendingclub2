@@ -36,7 +36,6 @@ class Loan(object):
         self.funded_amount = response['fundedAmount']
         self.term = response['term']
         self.subgrade = response['subGrade']
-        self.review_status = response['reviewStatus']
 
     def __repr__(self):
         """
@@ -57,7 +56,16 @@ class Loan(object):
 
         :returns: boolean
         """
-        return self.review_status == 'APPROVED'
+        return self._response['reviewStatus'] == 'APPROVED'
+
+    @property
+    def grade(self):
+        """
+        Get the grade of the loan
+
+        :returns: string
+        """
+        return self._response['grade']
 
     @property
     def percent_funded(self):
@@ -92,8 +100,7 @@ class Listing(object):
         filtered = list()
         for loan in self.loans:
             for filter_spec in filters:
-                lc_filter = filter_spec()
-                if lc_filter.meet_requirement(loan):
+                if filter_spec.meet_requirement(loan):
                     filtered.append(loan)
                     break
         return filtered
