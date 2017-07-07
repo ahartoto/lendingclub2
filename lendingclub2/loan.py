@@ -87,6 +87,29 @@ class Listing(object):
         """
         self.loans = list()
 
+    def __add__(self, other):
+        """
+        Add two listings together
+
+        :param other: instance of lendingclub2.loan.Listing
+        :returns: instance of lendingclub2.loan.Listing
+        """
+        new_listing = Listing()
+        new_listing.loans = list(self.loans) + list(other.loans)
+        return new_listing
+
+    def __contains__(self, loan_id):
+        """
+        Check if the items are in the listing
+
+        :param loan_id: int
+        :returns: boolean
+        """
+        for loan in self.loans:
+            if loan.id == loan_id:
+                return True
+        return False
+
     def __copy__(self):
         """
         Shallow copy of the listing
@@ -105,6 +128,19 @@ class Listing(object):
         :returns: boolean
         """
         return self.loans == other.loans
+
+    def __getitem__(self, loan_id):
+        """
+        Get the loan instance based on the ID
+
+        :param loan_id: int - loan ID
+        :raises IndexError: if the loan ID is not in the listing
+        :returns: instance of lendingclub2.loan.Loan
+        """
+        for loan in self.loans:
+            if loan.id == loan_id:
+                return loan
+        raise IndexError("loan with ID {} is not in listing".format(loan_id))
 
     def __iter__(self):
         """
