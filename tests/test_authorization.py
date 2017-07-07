@@ -16,6 +16,10 @@ from lendingclub2.authorization import Authorization
 class TestAuthAPIEnv(object):
     @classmethod
     def setup_class(cls):
+        # Required workaround
+        if Authorization._CODE is not None:
+            Authorization._CODE = None
+
         cls.clean = False
         if not os.getenv(API_KEY_ENV):
             os.environ[API_KEY_ENV] = 'foo'

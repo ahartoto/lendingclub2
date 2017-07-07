@@ -2,6 +2,9 @@
 
 """
 LendingClub2 Account Module
+
+Interface classes:
+    InvestorAccount
 """
 
 # lendingclub2

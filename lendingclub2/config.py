@@ -28,6 +28,8 @@ ENDPOINTS = {
                       '/{investor_id}/availablecash',
     'transfer': '/api/investor/{version}/accounts'
                 '/{investor_id}/funds/add',
+    'withdraw': '/api/investor/{version}/accounts'
+                '/{investor_id}/funds/withdraw',
     'pending_transfer': '/api/investor/{version}/accounts'
                         '/{investor_id}/funds/pending',
     'cancel_transfer': '/api/investor/{version}/accounts'
@@ -63,4 +65,5 @@ class TransferFrequency(Enum):
     ONCE = "LOAD_ONCE"
     WEEKLY = "LOAD_WEEKLY"
     BIWEEKLY = "LOAD_BIWEEKLY"
+    DAY_1_AND_16 = "LOAD_ON_DAY_1_AND_16"
     MONTHLY = "LOAD_MONTHLY"

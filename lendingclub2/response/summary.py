@@ -2,6 +2,9 @@
 
 """
 LendingClub2 Summary Response Module
+
+Interface classes:
+    Summary
 """
 
 # lendingclub2
