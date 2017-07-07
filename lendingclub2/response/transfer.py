@@ -6,6 +6,7 @@ LendingClub2 Transfer Response Module
 
 # Standard libraries
 import datetime
+import json
 
 # lendingclub2
 from lendingclub2 import requests
@@ -14,6 +15,7 @@ from lendingclub2.error import LCError
 from lendingclub2.response import Response
 
 
+# Interface functions
 def add(investor_id, amount, frequency=TransferFrequency.NOW,
         start_date=None, end_date=None):
     """
@@ -88,11 +90,26 @@ def pending(investor_id):
     Retrieve the pending transfers
 
     :param investor_id: int - the investor account id
-    :returns: instance of lendingclub2.response.Response
+    :returns: iterable of instance of lendingclub2.response.transfer.Transaction
     """
     url = DNS + ENDPOINTS['pending_transfer'].format(
         version=API_VERSION, investor_id=investor_id)
-    return Response(requests.get(url))
+
+    response = Response(requests.get(url))
+    if not response.successful:
+        fstr = "cannot find list of pending transactions"
+        raise LCError(fstr, details=json.dumps(response.json, indent=2))
+
+    transactions = list()
+    total_transactions = 0
+    try:
+        total_transactions = response.json['transfers']
+    except KeyError:
+        pass
+
+    for key in range(total_transactions):
+        transactions.append(Transaction(response.json[key]))
+    return transactions
 
 
 def withdraw(investor_id, amount):
@@ -112,3 +129,38 @@ def withdraw(investor_id, amount):
 
     payload = {'amount': amount}
     return Response(requests.post(url, json=payload))
+
+
+# Interface classes
+class Transaction(object):
+    """
+    Transfer transaction
+    """
+    def __init__(self, response):
+        """
+        Constructor
+
+        :param response: dict
+        """
+        self._response = response
+
+    @property
+    def amount(self):
+        """
+        Get the amount in the transaction
+
+        :returns: float
+        """
+        return self._response['amount']
+
+    @property
+    def id(self):
+        """
+        Get the ID of the transaction. If the response doesn't include
+        any ID, the return value is None.
+
+        :returns: int or None
+        """
+        if 'transactionId' in self._response:
+            return self._response['transactionId']
+        return None
