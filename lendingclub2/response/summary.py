@@ -15,7 +15,41 @@ class Summary(Response):
     Get the response of summary endpoint
     """
     def __init__(self, investor_id):
-        url = DNS + ENDPOINTS['summary'].format(version=API_VERSION,
-                                                investor_id=investor_id)
-        response = requests.get(url)
+        self._investor_id = investor_id
+        response = requests.get(self.url)
         Response.__init__(self, response)
+
+    @property
+    def available_cash(self):
+        """
+        Get all the available cash amount
+
+        :returns: float
+        """
+        return self.json['availableCash']
+
+    @property
+    def account_total(self):
+        """
+        Get the account total
+
+        :returns: float
+        """
+        return self.json['accountTotal']
+
+    @property
+    def url(self):
+        """
+        Find the relevant url
+
+        :returns: string
+        """
+        url = DNS + ENDPOINTS['summary'].format(version=API_VERSION,
+                                                investor_id=self._investor_id)
+        return url
+
+    def update(self):
+        """
+        Update the summary
+        """
+        self._response = requests.get(self.url)

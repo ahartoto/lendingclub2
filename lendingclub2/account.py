@@ -4,33 +4,54 @@
 LendingClub2 Account Module
 """
 
+# lendingclub2
+from lendingclub2 import utils
+from lendingclub2.error import LCError
+from lendingclub2.response.summary import Summary
 
-class Account(object):
+
+class InvestorAccount(object):
     """
-    Representation of an account in Lending Club
+    Representation of an investor account in Lending Club
     """
-    investor_id = None
+    _ID = None
 
     def __init__(self):
         """
         Constructor
         """
-        pass
+        self._summary = Summary(InvestorAccount.id())
 
-    @property
-    def balance(self):
-        """
-        Get the current balance of the account
-
-        :returns: float
-        """
-        return 0.0
-
-    @property
-    def id(self):
+    @classmethod
+    def id(cls):
         """
         Get the account ID
 
         :returns: string
         """
-        return self.investor_id
+        if cls._ID is None:
+            config = utils.get_config_content()
+            try:
+                cls._ID = config['account']['investor_id']
+            except KeyError as exc:
+                fstr = "cannot find the information of the investor ID"
+                raise LCError(fstr, hint=str(exc))
+        return cls._ID
+
+    @property
+    def available_balance(self):
+        """
+        Get the amount of cash that's available
+
+        :returns: float
+        """
+        return self._summary.available_cash
+
+    @property
+    def total_balance(self):
+        """
+        Get the total balance of the account
+
+        :returns: float
+        """
+        return self._summary.account_total
