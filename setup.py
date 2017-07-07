@@ -17,7 +17,7 @@ setup(
     author='Alex Hartoto',
     author_email='ahartoto.dev@gmail.com',
     url='https://github.com/ahartoto/lendingclub2',
-    keywords='lendingclub python api',
+    keywords='lendingclub lending-club p2p loan python api',
     license=open('LICENSE').read(),
     classifiers=[
         'Development Status :: 1 - Planning',

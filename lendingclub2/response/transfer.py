@@ -19,7 +19,7 @@ from lendingclub2.response import Response
 def add(investor_id, amount, frequency=TransferFrequency.NOW,
         start_date=None, end_date=None):
     """
-    Withdraw the account
+    Add fund to the account
 
     :param investor_id: int - the investor account id
     :param amount: float - amount to withdraw

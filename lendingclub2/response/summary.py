@@ -18,6 +18,11 @@ class Summary(Response):
     Get the response of summary endpoint
     """
     def __init__(self, investor_id):
+        """
+        Constructor
+
+        :param investor_id: int
+        """
         self._investor_id = investor_id
         response = requests.get(self.url)
         Response.__init__(self, response)
