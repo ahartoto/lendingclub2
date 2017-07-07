@@ -356,7 +356,7 @@ class Listing(object):
 
         :returns: an iterable
         """
-        return self.loans.__iter__()
+        return iter(self.loans)
 
     def __len__(self):
         """
