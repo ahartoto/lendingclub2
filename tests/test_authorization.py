@@ -61,6 +61,7 @@ class TestAuthAPIConfigEnv(object):
             except KeyError:
                 pass
 
+        cls.clean = create_new_config
         if create_new_config:
             fpath = 'test_config.cfg'
             os.environ[CONFIG_FPATH_ENV] = fpath
@@ -82,7 +83,7 @@ class TestAuthAPIConfigEnv(object):
         if cls.restore is not None:
             os.environ[API_KEY_ENV] = cls.restore
 
-        if os.path.exists(os.environ[CONFIG_FPATH_ENV]):
+        if cls.clean:
             os.remove(os.environ[CONFIG_FPATH_ENV])
 
         if cls.old_config_fpath is None:
@@ -93,3 +94,62 @@ class TestAuthAPIConfigEnv(object):
     def test_api_config_env(self):
         auth = Authorization()
         assert auth.key == TestAuthAPIConfigEnv.key
+
+
+class TestAuthAPIConfig(object):
+    @classmethod
+    def setup_class(cls):
+        cls.key = 'bar'
+
+        cls.restore = None
+        if os.getenv(API_KEY_ENV):
+            cls.restore = os.getenv(API_KEY_ENV)
+            del os.environ[API_KEY_ENV]
+
+        cls.old_config_fpath = None
+        if os.getenv(CONFIG_FPATH_ENV) is not None:
+            cls.old_config_fpath = os.getenv(CONFIG_FPATH_ENV)
+            del os.environ[CONFIG_FPATH_ENV]
+
+        cls.config = None
+        if os.path.exists(CONFIG_FPATH):
+            cls.config = ConfigParser()
+            with open(CONFIG_FPATH) as fin:
+                cls.config.read_file(fin)
+
+            try:
+                _ = cls.config['access']['api_key']
+            except KeyError:
+                pass
+
+        config = ConfigParser()
+        config['access'] = {
+            'api_key': cls.key,
+        }
+
+        with open(CONFIG_FPATH, mode='w') as fout:
+            config.write(fout)
+
+    @classmethod
+    def teardown_class(cls):
+        # Required workaround
+        if Authorization._CODE is not None:
+            Authorization._CODE = None
+
+        if cls.restore is not None:
+            os.environ[API_KEY_ENV] = cls.restore
+
+        if cls.old_config_fpath is not None:
+            os.environ[CONFIG_FPATH_ENV] = cls.old_config_fpath
+
+        if cls.config is not None:
+            with open(CONFIG_FPATH, mode='w') as fout:
+                cls.config.write(fout)
+
+    def test_api_config_env(self):
+        auth = Authorization()
+        assert auth.key == TestAuthAPIConfig.key
+
+    def test_header(self):
+        auth = Authorization()
+        assert auth.header == {'Authorization': auth.key}

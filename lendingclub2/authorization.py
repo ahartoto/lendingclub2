@@ -61,4 +61,4 @@ class Authorization(object):
 
         :returns: dict
         """
-        return {'Authorization': Authorization.key}
+        return {'Authorization': self.key}
