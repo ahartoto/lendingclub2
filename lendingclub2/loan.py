@@ -122,6 +122,9 @@ class Listing(object):
             fstr = "cannot search for any loans"
             raise LCError(fstr, details=json.dumps(response.json, indent=2))
 
+        # Reset the stored loans whenever we search again as long as the
+        # latest request was successful
+        self.loans = list()
         for loan_json in response.json['loans']:
             loan = Loan(loan_json)
             self.loans.append(loan)
