@@ -29,7 +29,7 @@ class TestListing(object):
         listing.search()
         assert isinstance(listing.loans, collections.Iterable)
 
-        grade = random.choice('ABCDE')
+        grade = random.choice('ABCDEFG')
         loans = listing.filter(filter.FilterByGrade(grade))
         assert isinstance(loans, collections.Iterable)
         assert len(loans) >= 0

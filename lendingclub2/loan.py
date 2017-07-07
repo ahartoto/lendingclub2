@@ -19,6 +19,76 @@ LISTING_VERSION = '1.2'
 
 
 # Interface classes
+class Borrower(object):
+    """
+    Information of the borrower
+    """
+    def __init__(self, response):
+        """
+        Constructor
+
+        :param response: dict
+        """
+        self._response = response
+
+    @property
+    def address_state(self):
+        """
+        Get the address state of the loaner
+
+        :returns: string (two characters)
+        """
+        return self._response['addrState']
+
+    @property
+    def credit_score(self):
+        """
+        Get the credit score of the loaner
+
+        :returns: string
+        """
+        return "{}-{}".format(self._response['ficoRangeLow'],
+                              self._response['ficoRangeHigh'])
+
+    @property
+    def employed(self):
+        """
+        Check if the borrower is employed
+
+        :returns: boolean
+        """
+        return self._response['empLength'] >= 0
+
+    @property
+    def employment_length(self):
+        """
+        The length of employment
+
+        :returns: int (-1 if not employed) - number of months being employed
+        """
+        if self._response['empLength'] < 0:
+            return -1
+        return self._response['empLength']
+
+    @property
+    def income_verified(self):
+        """
+        LC had verified the income of the borrower
+
+        :returns: boolean
+        """
+        return self._response['isIncV'] == 'VERIFIED'
+
+    @property
+    def title(self):
+        """
+        Employment title
+
+        :returns: string or None
+        """
+        return self._response['empTitle']
+
+
 class Loan(object):
     """
     Information of each loan
@@ -59,6 +129,33 @@ class Loan(object):
         return self._response['reviewStatus'] == 'APPROVED'
 
     @property
+    def borrower(self):
+        """
+        Get the information of the borrower
+
+        :returns: instance of lendingclub2.loan.Borrower
+        """
+        return Borrower(self._response)
+
+    @property
+    def expected_default_rate(self):
+        """
+        The expected default rate of the loan
+
+        :returns: float
+        """
+        return self._response['expDefaultRate'] / 100.0
+
+    @property
+    def description(self):
+        """
+        Get the description of the loan
+
+        :returns: string or None
+        """
+        return self._response['desc']
+
+    @property
     def grade(self):
         """
         Get the grade of the loan
@@ -68,6 +165,33 @@ class Loan(object):
         return self._response['grade']
 
     @property
+    def installment(self):
+        """
+        Expected monthly payment owed by borrower
+
+        :returns: float
+        """
+        return self._response['installment']
+
+    @property
+    def interest_rate(self):
+        """
+        Get the interest rate
+
+        :returns: float
+        """
+        return self._response['inRate'] / 100.0
+
+    @property
+    def investor_count(self):
+        """
+        Get the number of investors already purchased the notes
+
+        :returns: int
+        """
+        return self._response['investorCount']
+
+    @property
     def percent_funded(self):
         """
         Find percentage of amount funded
@@ -75,6 +199,15 @@ class Loan(object):
         :returns: float
         """
         return self.funded_amount / self.amount
+
+    @property
+    def purpose(self):
+        """
+        Get the purpose of the loan
+
+        :returns: string
+        """
+        return self._response['purpose']
 
 
 class Listing(object):

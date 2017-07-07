@@ -27,6 +27,33 @@ class Filter(ABC):
         return True
 
 
+class FilterByFunded(Filter):
+    """
+    Filter by percentage funded
+    """
+    def __init__(self, percentage):
+        """
+        Constructor.
+
+        :param percentage: float (between 0 and 1 inclusive)
+        """
+        if percentage < 0.0 or percentage > 1.0:
+            fstr = "percentage needs to be between 0 and 1 (inclusive)"
+            raise LCError(fstr)
+
+        self._percentage = percentage
+
+    def meet_requirement(self, loan):
+        """
+        The loan would have to be at least the percentage value to meet the
+        requirement.
+
+        :param loan: instance of lendingclub2.loan.Loan
+        :returns: boolean
+        """
+        return loan.percent_funded >= self._percentage
+
+
 class FilterByGrade(Filter):
     """
     Filter by grade
