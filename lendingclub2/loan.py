@@ -6,6 +6,7 @@ LendingClub2 Loan Module
 
 # Standard libraries
 import json
+from operator import attrgetter
 
 # lendingclub2
 from lendingclub2 import requests
@@ -61,6 +62,25 @@ class Borrower(object):
                               self._response['ficoRangeHigh'])
 
     @property
+    def delinquency_in_2_years(self):
+        """
+        The Number of 30+ days past-due incidences of delinquency
+        in the borrower's credit file for the past 2 years.
+
+        :returns: integer
+        """
+        return self._response['delinq2Yrs'] or 0
+
+    @property
+    def dti(self):
+        """
+        Debt-to-income ratio
+
+        :returns: float
+        """
+        return self._response['dti'] or 0.0
+
+    @property
     def employed(self):
         """
         Check if the borrower is employed
@@ -88,6 +108,51 @@ class Borrower(object):
         :returns: boolean
         """
         return self._response['isIncV'] == 'VERIFIED'
+
+    @property
+    def inquiries_in_last_6_mo(self):
+        """
+        The Number of inquiries by creditors during the past 6 months.
+
+        :returns: integer
+        """
+        return self._response['inqLast6Mths'] or 0
+
+    @property
+    def months_since_last_delinq(self):
+        """
+        The Number of months since the borrower's last delinquency.
+
+        :returns: integer
+        """
+        return self._response['mthsSinceLastDelinq'] or 0
+
+    @property
+    def mortgage_accounts(self):
+        """
+        Number of mortgage accounts.
+
+        :returns: integer
+        """
+        return self._response['mortAcc'] or 0
+
+    @property
+    def public_records(self):
+        """
+        Number of derogatory public records.
+
+        :returns: integer
+        """
+        return self._response['pubRec'] or 0
+
+    @property
+    def revolving_balance(self):
+        """
+        Total credit revolving balance.
+
+        :returns: float
+        """
+        return self._response['revolBal'] or 0.0
 
     @property
     def title(self):
@@ -125,7 +190,7 @@ class Loan(object):
         """
         template = "Loan(id={}, amount={:.2f}, funded={:.2f}%, term={}," \
                    " grade={})".format(
-                       self.id, self.amount, self.percent_funded * 100,
+                       self.id, self.amount, self.percent_funded,
                        self.term, self.subgrade)
         return template
 
@@ -154,7 +219,7 @@ class Loan(object):
 
         :returns: float
         """
-        return self._response['expDefaultRate'] / 100.0
+        return self._response['expDefaultRate']
 
     @property
     def description(self):
@@ -188,9 +253,9 @@ class Loan(object):
         """
         Get the interest rate
 
-        :returns: float
+        :returns: float (0 - 100.0)
         """
-        return self._response['inRate'] / 100.0
+        return self._response['inRate']
 
     @property
     def investor_count(self):
@@ -199,16 +264,16 @@ class Loan(object):
 
         :returns: int
         """
-        return self._response['investorCount']
+        return self._response['investorCount'] or 0
 
     @property
     def percent_funded(self):
         """
         Find percentage of amount funded
 
-        :returns: float
+        :returns: float (0 - 100.0)
         """
-        return self.funded_amount / self.amount
+        return self.funded_amount * 100.0 / self.amount
 
     @property
     def purpose(self):
@@ -364,3 +429,22 @@ class Listing(object):
         for loan_json in response.json['loans']:
             loan = Loan(loan_json)
             self.loans.append(loan)
+
+    def sort(self, by_grade=True, by_term=False):
+        """
+        Sort the listing
+
+        :param by_grade: boolean
+        :param by_term: boolean
+        """
+        if not self.loans:
+            return
+
+        if by_grade:
+            self.loans = sorted(self.loans, key=attrgetter('grade',
+                                                           'subgrade', 'id'))
+        elif by_term:
+            self.loans = sorted(self.loans, key=attrgetter('term', 'id'))
+        else:
+            self.loans = sorted(self.loans, key=attrgetter('percent_funded'),
+                                reverse=True)

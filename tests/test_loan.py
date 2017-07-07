@@ -37,14 +37,26 @@ class TestListing(object):
             assert selected_loan.grade == grade
 
         term = 36
-        loans = listing.filter(filter.FilterByTerm(value=term))
+        percentage = 75.0
+        loans = listing.filter(filter.FilterByTerm(value=term),
+                               filter.FilterByFunded(percentage))
         assert len(loans) >= 0
         for selected_loan in loans:
             assert selected_loan.term == term
+            assert selected_loan.percent_funded >= percentage
+
+        traits = (
+            filter.BorrowerEmployedTrait(),
+        )
+        loans = listing.filter(filter.FilterByBorrowerTraits(traits))
+        assert len(loans) >= 0
+        for selected_loan in loans:
+            assert selected_loan.borrower.employed
 
         # Chain the filters
         loans = listing.filter(filter.FilterByGrade(grade),
-                               filter.FilterByTerm(value=term))
+                               filter.FilterByTerm(value=term),
+                               filter.FilterByApproved())
         new_loans = listing.filter(filter.FilterByGrade(grade)).filter(
-            filter.FilterByTerm(value=term))
+            filter.FilterByTerm(value=term)).filter(filter.FilterByApproved())
         assert loans == new_loans

@@ -5,6 +5,7 @@ LendingClub2 Filter Module
 """
 
 # Standard libraries
+import collections
 from abc import ABC, abstractmethod
 
 # lendingclub2
@@ -12,6 +13,35 @@ from lendingclub2.error import LCError
 
 
 # pylint: disable=too-few-public-methods
+class BorrowerTrait(ABC):
+    """
+    Abstract base class to define borrowers of interest
+    """
+    @abstractmethod
+    def matches(self, borrower):
+        """
+        Check if borrower has the trait
+
+        :param borrower: instance of lendingclub2.loan.Borrower
+        :returns: boolean
+        """
+        return True
+
+
+class BorrowerEmployedTrait(BorrowerTrait):
+    """
+    Check if borrower is employed
+    """
+    def matches(self, borrower):
+        """
+        Check if borrower has the trait
+
+        :param borrower: instance of lendingclub2.loan.Borrower
+        :returns: boolean
+        """
+        return borrower.employed
+
+
 class Filter(ABC):
     """
     Abstract base class for filtering the loan
@@ -27,6 +57,53 @@ class Filter(ABC):
         return True
 
 
+class FilterByApproved(Filter):
+    """
+    Filter by if the loan is already approved
+    """
+    def meet_requirement(self, loan):
+        """
+        Check if the loan is meeting the filter requirement
+
+        :param loan: instance of lendingclub2.loan.Loan
+        :returns: boolean
+        """
+        return loan.approved
+
+
+class FilterByBorrowerTraits(Filter):
+    """
+    Filter to have borrower matching specific traits
+    """
+    def __init__(self, traits):
+        """
+        Constructor
+
+        :param traits: instance of lendingclub2.filter.BorrowerTrait
+                       or iterable of instance of
+                       lendingclub2.filter.BorrowerTrait
+        """
+        if isinstance(traits, collections.Iterable):
+            self._specs = traits
+        elif isinstance(traits, BorrowerTrait):
+            self._specs = (traits, )
+        else:
+            fstr = "invalid traits type for {}".format(self.__class__.__name__)
+            raise LCError(fstr)
+
+    def meet_requirement(self, loan):
+        """
+        Check if the loan is meeting the filter requirement
+
+        :param loan: instance of lendingclub2.loan.Loan
+        :returns: boolean
+        """
+        for spec in self._specs:
+            if not spec.matches(loan.borrower):
+                return False
+        return True
+
+
 class FilterByFunded(Filter):
     """
     Filter by percentage funded
@@ -35,10 +112,10 @@ class FilterByFunded(Filter):
         """
         Constructor.
 
-        :param percentage: float (between 0 and 1 inclusive)
+        :param percentage: float (between 0 and 100 inclusive)
         """
-        if percentage < 0.0 or percentage > 1.0:
-            fstr = "percentage needs to be between 0 and 1 (inclusive)"
+        if percentage < 0.0 or percentage > 100.0:
+            fstr = "percentage needs to be between 0 and 100 (inclusive)"
             raise LCError(fstr)
 
         self._percentage = percentage
