@@ -39,10 +39,11 @@ ENDPOINTS = {
                       '{investor_id}/detailednotes',
     'portfolios': '/api/investor/{version}/accounts/{investor_id}/portfolios',
     'submit_order': '/api/investor/{version}/accounts/{investor_id}/orders',
+    'loans': '/api/investor/{version}/loans/listing',
     'filters': '/api/investor/{version}/accounts/{investor_id}/filters',
 }
 
-REQUEST_LIMIT_PER_SEC = 1
+REQUEST_LIMIT_PER_SEC = 1.0
 
 
 # Interface enums
