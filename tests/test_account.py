@@ -14,9 +14,8 @@ from lendingclub2.error import LCError
 
 class TestInvestorAccount(object):
     def test_properties(self):
-        investor = InvestorAccount()
         try:
-            investor.id()
+            investor = InvestorAccount()
         except LCError:
             pytest.skip("skip because cannot find account ID")
 
