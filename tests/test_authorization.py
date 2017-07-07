@@ -149,6 +149,8 @@ class TestAuthAPIConfig(object):
         if cls.config is not None:
             with open(CONFIG_FPATH, mode='w') as fout:
                 cls.config.write(fout)
+        else:
+            os.remove(CONFIG_FPATH)
 
     def test_api_config_env(self):
         auth = Authorization()
