@@ -31,6 +31,16 @@ class Borrower(object):
         """
         self._response = response
 
+    def __repr__(self):
+        """
+        String representation of the borrower
+
+        :returns: string
+        """
+        return "Borrower(credit_score={}, employed={})".format(
+            self.credit_score, self.employed,
+        )
+
     @property
     def address_state(self):
         """
@@ -57,7 +67,7 @@ class Borrower(object):
 
         :returns: boolean
         """
-        return self._response['empLength'] >= 0
+        return self.employment_length >= 0
 
     @property
     def employment_length(self):
@@ -66,7 +76,7 @@ class Borrower(object):
 
         :returns: int (-1 if not employed) - number of months being employed
         """
-        if self._response['empLength'] < 0:
+        if self._response['empLength'] is None:
             return -1
         return self._response['empLength']
 
