@@ -10,6 +10,7 @@ Interface classes:
 # lendingclub2
 from lendingclub2 import utils
 from lendingclub2.error import LCError
+from lendingclub2.response.notes import Notes
 from lendingclub2.response.summary import Summary
 
 
@@ -24,6 +25,7 @@ class InvestorAccount(object):
         Constructor
         """
         self._summary = Summary(InvestorAccount.id())
+        self._notes = Notes(InvestorAccount.id())
 
     @classmethod
     def id(cls):
@@ -40,6 +42,15 @@ class InvestorAccount(object):
                 fstr = "cannot find the information of the investor ID"
                 raise LCError(fstr, hint=str(exc))
         return cls._ID
+
+    @property
+    def notes(self):
+        """
+        Get the notes associated with the account
+
+        :returns: instance of lendingclub2.response.Notes
+        """
+        return self._notes
 
     @property
     def available_balance(self):

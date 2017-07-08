@@ -96,6 +96,15 @@ class Note(object):
         return self._response['loanAmount']
 
     @property
+    def loan_id(self):
+        """
+        Get the loan ID
+
+        :returns: int
+        """
+        return self._response['loanId']
+
+    @property
     def loan_length(self):
         """
         Get the total loan length in months
