@@ -47,6 +47,16 @@ REQUEST_LIMIT_PER_SEC = 1.0
 
 
 # Interface enums
+class NoteStatus(Enum):
+    """
+    Enum of note status
+    """
+    CHARGED_OFF = 'Charged Off'
+    CURRENT = 'Current'
+    FULLY_PAID = 'Fully Paid'
+    ISSUED = 'Issued'
+
+
 class ResponseCode(Enum):
     """
     Enum of the Lending Club response code for a request

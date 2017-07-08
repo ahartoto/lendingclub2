@@ -6,7 +6,7 @@ LendingClub2 Notes Response Module
 
 # lendingclub2
 from lendingclub2 import requests
-from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
+from lendingclub2.config import API_VERSION, DNS, ENDPOINTS, NoteStatus
 from lendingclub2.response import Response
 
 
@@ -47,7 +47,7 @@ class Note(object):
 
         :returns: boolean
         """
-        return self.status == 'Charged Off'
+        return self.status == NoteStatus.CHARGED_OFF
 
     @property
     def current(self):
@@ -56,7 +56,7 @@ class Note(object):
 
         :returns: boolean
         """
-        return self.status == 'Current'
+        return self.status == NoteStatus.CURRENT
 
     @property
     def id(self):
@@ -111,7 +111,7 @@ class Note(object):
 
         :returns: boolean
         """
-        return self.status == 'Issued'
+        return self.status == NoteStatus.ISSUED
 
     @property
     def paid(self):
@@ -120,7 +120,7 @@ class Note(object):
 
         :returns: boolean
         """
-        return self.status == 'Fully Paid'
+        return self.status == NoteStatus.FULLY_PAID
 
     @property
     def status(self):
