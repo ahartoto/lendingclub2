@@ -9,32 +9,29 @@ from lendingclub2 import requests
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
 from lendingclub2.error import LCError
 from lendingclub2.response import Response
-from lendingclub2.response.notes import Note
 
 
 class OrderNote(object):
     """
     Class to wrap around note to be ordered
     """
-    def __init__(self, note, amount, portfolio_id=None):
+    def __init__(self, loan_id, amount, portfolio_id=None):
         """
         Constructor
 
-        :param note: instance of lendingclub2.response.notes.Note
+        :param loan_id: int
         :param amount: float - must be greater than 0 (usually 25)
         :param portfolio_id: int - portfolio ID which the note will be
                              assigned to if the order is submitted successfully
         """
-        if not isinstance(note, Note):
-            fstr = "note should be an instance of " \
-                   "lendingclub2.response.notes.Note"
-            raise LCError(fstr)
-
         if amount <= 0:
             fstr = "amount should be a positive number"
             raise LCError(fstr)
+        elif amount % 25 != 0:
+            fstr = "amount needs to be a multiple of $25"
+            raise LCError(fstr)
 
-        self._note = note
+        self._loan_id = loan_id
         self._amount = amount
         self._portfolio_id = portfolio_id
 
@@ -54,7 +51,7 @@ class OrderNote(object):
 
         :returns: int
         """
-        return self._note.loan_id
+        return self._loan_id
 
     @property
     def portfolio_id(self):
@@ -97,6 +94,15 @@ class Order(Response):
         Response.__init__(self, response)
 
     @property
+    def id(self):
+        """
+        Get the id of the order
+
+        :returns: int
+        """
+        return self._response.json['orderInstructId']
+
+    @property
     def url(self):
         """
         Get the relevant URL
@@ -106,3 +112,32 @@ class Order(Response):
         url = DNS + ENDPOINTS['submit_order'].format(
             version=API_VERSION, investor_id=self._investor_id)
         return url
+
+    @property
+    def successful(self):
+        """
+        Determine if the order submission was successful
+
+        :returns: boolean
+        """
+        if not Response.successful:
+            return False
+
+        # Get the confirmation
+        for confirm_json in self.json['orderConfirmations']:
+            loan_id = confirm_json['loanId']
+            note = None
+            for order_note in self._order_notes:
+                if loan_id == order_note.loan_id:
+                    note = order_note
+                    break
+            if note is None:
+                return False
+
+            # Now check if we see ORDER_FULFILLED in executionStatus
+            if 'ORDER_FULFILLED' not in confirm_json['executionStatus']:
+                return False
+            # Now check if the amount is non-zero
+            if not confirm_json['investedAmount']:
+                return False
+        return True
