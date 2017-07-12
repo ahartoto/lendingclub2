@@ -11,6 +11,8 @@ Interface classes:
 from lendingclub2 import utils
 from lendingclub2.error import LCError
 from lendingclub2.response.notes import Notes
+from lendingclub2.response.order import Order
+from lendingclub2.response.portfolio import Portfolios
 from lendingclub2.response.summary import Summary
 
 
@@ -26,6 +28,7 @@ class InvestorAccount(object):
         """
         self._summary = Summary(InvestorAccount.id())
         self._notes = Notes(InvestorAccount.id())
+        self._portfolios = Portfolios(InvestorAccount.id())
 
     @classmethod
     def id(cls):
@@ -44,15 +47,6 @@ class InvestorAccount(object):
         return cls._ID
 
     @property
-    def notes(self):
-        """
-        Get the notes associated with the account
-
-        :returns: instance of lendingclub2.response.Notes
-        """
-        return self._notes
-
-    @property
     def available_balance(self):
         """
         Get the amount of cash that's available
@@ -62,6 +56,24 @@ class InvestorAccount(object):
         return self._summary.available_cash
 
     @property
+    def notes(self):
+        """
+        Get the notes associated with the account
+
+        :returns: instance of lendingclub2.response.notes.Notes
+        """
+        return self._notes
+
+    @property
+    def portfolios(self):
+        """
+        Get the portfolios associated with the account
+
+        :returns: instance of lendingclub2.response.portfolio.Portfolios
+        """
+        return self._portfolios
+
+    @property
     def total_balance(self):
         """
         Get the total balance of the account
@@ -69,3 +81,15 @@ class InvestorAccount(object):
         :returns: float
         """
         return self._summary.account_total
+
+    def invest(self, *order_notes):
+        """
+        Invest to loans as specified
+
+        :param order_notes: iterable of instance of
+                            lendingclub2.response.order.OrderNote
+        """
+        order = Order(self.id(), *order_notes)
+        if not order.successful:
+            fstr = "could not complete the request completely"
+            raise LCError(fstr)
