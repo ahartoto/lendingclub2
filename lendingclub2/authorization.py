@@ -20,6 +20,9 @@ class Authorization(object):
     _CODE = None
 
     def __init__(self):
+        """
+        Constructor
+        """
         if Authorization._CODE is not None:
             return
 

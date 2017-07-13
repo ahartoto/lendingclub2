@@ -7,8 +7,12 @@ Interface classes:
     InvestorAccount
 """
 
+# Standard libraries
+import os
+
 # lendingclub2
 from lendingclub2 import utils
+from lendingclub2.config import INVESTOR_ID_ENV
 from lendingclub2.error import LCError
 from lendingclub2.response.notes import Notes
 from lendingclub2.response.order import Order
@@ -38,12 +42,15 @@ class InvestorAccount(object):
         :returns: string
         """
         if cls._ID is None:
-            config = utils.get_config_content()
-            try:
-                cls._ID = config['account']['investor_id']
-            except KeyError as exc:
-                fstr = "cannot find the information of the investor ID"
-                raise LCError(fstr, hint=str(exc))
+            if os.getenv(INVESTOR_ID_ENV):
+                cls._ID = os.getenv(INVESTOR_ID_ENV)
+            else:
+                config = utils.get_config_content()
+                try:
+                    cls._ID = config['account']['investor_id']
+                except KeyError as exc:
+                    fstr = "cannot find the information of the investor ID"
+                    raise LCError(fstr, hint=str(exc))
         return cls._ID
 
     @property

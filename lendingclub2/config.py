@@ -43,6 +43,8 @@ ENDPOINTS = {
     'filters': '/api/investor/{version}/accounts/{investor_id}/filters',
 }
 
+INVESTOR_ID_ENV = 'LENDING_CLUB_INVESTOR_ID'
+
 REQUEST_LIMIT_PER_SEC = 1.0
 
 
