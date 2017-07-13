@@ -6,10 +6,14 @@ from setuptools import setup
 # lendingclub2
 from lendingclub2 import __version__
 
+with open('README.rst') as fin:
+    long_description = fin.read()
+
 setup(
     name="lendingclub2",
     version=__version__,
     description='Help automating LendingClub processes',
+    long_description=long_description,
     packages=['lendingclub2'],
     install_requires=[
         'requests>=2.18',
