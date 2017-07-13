@@ -17,7 +17,7 @@ Requirements
 ************
 
 This library expects that the user has pre-generated the Authentication key.
-If you are unfamiliar with it, please go to `this page
+If you are unfamiliar with it, please go to Lending Club `documentation page
 <https://www.lendingclub.com/developers/authentication.action>`_ to find
 the instructions on how to generate one.
 
