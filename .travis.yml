@@ -3,6 +3,7 @@
 language: python
 cache: pip
 python:
+- "3.4"
 - "3.5"
 - "3.6"
 install:
@@ -10,4 +11,4 @@ install:
 - pip install -r requirements-dev.txt
 script:
 - pylint lendingclub2
-- pip install -e . && pytest tests
+- pip install -e . && python -m pytest tests
