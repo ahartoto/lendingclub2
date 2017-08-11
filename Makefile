@@ -11,3 +11,6 @@ lint:
 
 test:
 	@$(PYTEST) tests
+
+package:
+	@$(PYTHON) setup.py bdist_wheel

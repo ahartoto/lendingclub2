@@ -17,11 +17,18 @@ except ImportError:
     # pylint: enable=unused-import
 
     # pylint: disable=too-few-public-methods
-    class ABC(metaclass=ABCMeta):
-        """
-        Helper class that has ABCMeta as its metaclass.
-        """
-        pass
+    try:
+        class ABC(metaclass=ABCMeta):
+            """
+            Helper class that has ABCMeta as its metaclass for Python 3.3.
+            """
+            pass
+    except SyntaxError:
+        class ABC:
+            """
+            Helper class that has ABCMeta as its metaclass for Python 2.7.
+            """
+            __metaclass__ = ABCMeta
     # pylint: enable=too-few-public-methods
 
 
