@@ -6,7 +6,24 @@ LendingClub2 Filter Module
 
 # Standard libraries
 import collections
-from abc import ABC, abstractmethod
+from abc import abstractmethod
+
+try:
+    from abc import ABC
+except ImportError:
+    # Support for Python version older than 3.4
+    # pylint: disable=unused-import
+    from abc import ABCMeta
+    # pylint: enable=unused-import
+
+    # pylint: disable=too-few-public-methods
+    class ABC(metaclass=ABCMeta):
+        """
+        Helper class that has ABCMeta as its metaclass.
+        """
+        pass
+    # pylint: enable=too-few-public-methods
+
 
 # lendingclub2
 from lendingclub2.error import LCError
