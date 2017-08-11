@@ -8,6 +8,9 @@ LendingClub2 Filter Module
 import collections
 from abc import abstractmethod
 
+# Six
+import six
+
 try:
     from abc import ABC
 except ImportError:
@@ -17,7 +20,8 @@ except ImportError:
     # pylint: enable=unused-import
 
     # pylint: disable=too-few-public-methods
-    class ABC(metaclass=ABCMeta):
+    @six.add_metaclass(ABCMeta)
+    class ABC(object):
         """
         Helper class that has ABCMeta as its metaclass.
         """

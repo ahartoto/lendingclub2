@@ -9,7 +9,7 @@ import json
 from operator import attrgetter
 
 # lendingclub2
-from lendingclub2 import requests
+from lendingclub2 import request
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
 from lendingclub2.error import LCError
 from lendingclub2.response import Response
@@ -418,7 +418,7 @@ class Listing(object):
             url += '?' + '&'.join(criteria)
 
         headers = {'X-LC-LISTING-VERSION': LISTING_VERSION}
-        response = Response(requests.get(url, headers=headers))
+        response = Response(request.get(url, headers=headers))
         if not response.successful:
             fstr = "cannot search for any loans"
             raise LCError(fstr, details=json.dumps(response.json, indent=2))

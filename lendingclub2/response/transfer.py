@@ -9,7 +9,7 @@ import datetime
 import json
 
 # lendingclub2
-from lendingclub2 import requests
+from lendingclub2 import request
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS, TransferFrequency
 from lendingclub2.error import LCError
 from lendingclub2.response import Response
@@ -63,7 +63,7 @@ def add(investor_id, amount, frequency=TransferFrequency.NOW,
     if end_date is not None:
         payload['endDate'] = end_date.isoformat()
 
-    return Response(requests.post(url, json=payload))
+    return Response(request.post(url, json=payload))
 
 
 def cancel(investor_id, *transaction_ids):
@@ -82,7 +82,7 @@ def cancel(investor_id, *transaction_ids):
         version=API_VERSION, investor_id=investor_id)
 
     payload = {'transferIds': list(transaction_ids)}
-    return Response(requests.post(url, json=payload))
+    return Response(request.post(url, json=payload))
 
 
 def pending(investor_id):
@@ -95,7 +95,7 @@ def pending(investor_id):
     url = DNS + ENDPOINTS['pending_transfer'].format(
         version=API_VERSION, investor_id=investor_id)
 
-    response = Response(requests.get(url))
+    response = Response(request.get(url))
     if not response.successful:
         fstr = "cannot find list of pending transactions"
         raise LCError(fstr, details=json.dumps(response.json, indent=2))
@@ -128,7 +128,7 @@ def withdraw(investor_id, amount):
         raise LCError(fstr)
 
     payload = {'amount': amount}
-    return Response(requests.post(url, json=payload))
+    return Response(request.post(url, json=payload))
 
 
 # Interface classes

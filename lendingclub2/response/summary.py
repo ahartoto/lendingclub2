@@ -8,7 +8,7 @@ Interface classes:
 """
 
 # lendingclub2
-from lendingclub2 import requests
+from lendingclub2 import request
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
 from lendingclub2.response import Response
 
@@ -24,7 +24,7 @@ class Summary(Response):
         :param investor_id: int
         """
         self._investor_id = investor_id
-        response = requests.get(self.url)
+        response = request.get(self.url)
         Response.__init__(self, response)
 
     @property
@@ -60,4 +60,4 @@ class Summary(Response):
         """
         Update the summary
         """
-        self._response = requests.get(self.url)
+        self._response = request.get(self.url)

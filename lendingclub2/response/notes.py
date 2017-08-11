@@ -5,7 +5,7 @@ LendingClub2 Notes Response Module
 """
 
 # lendingclub2
-from lendingclub2 import requests
+from lendingclub2 import request
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS, NoteStatus
 from lendingclub2.response import Response
 
@@ -152,7 +152,7 @@ class Notes(Response):
         :param investor_id: int
         """
         self._investor_id = investor_id
-        response = requests.get(self.url)
+        response = request.get(self.url)
         Response.__init__(self, response)
         self._notes = list()
         try:

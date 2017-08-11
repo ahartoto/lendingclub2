@@ -5,7 +5,7 @@ LendingClub2 Response Portfolio Module
 """
 
 # lendingclub2
-from lendingclub2 import requests
+from lendingclub2 import request
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
 from lendingclub2.response import Response
 
@@ -38,7 +38,7 @@ class Portfolio(object):
         if description is not None:
             payload['portfolioDescription'] = description
 
-        response = requests.post(self.url, json=payload)
+        response = request.post(self.url, json=payload)
         self._response = Response(response)
 
     @property
@@ -102,7 +102,7 @@ class Portfolios(Response):
         :param investor_id: int
         """
         self._investor_id = investor_id
-        response = requests.get(self.url)
+        response = request.get(self.url)
         Response.__init__(self, response)
 
         # Formulate the list of portfolios

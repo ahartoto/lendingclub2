@@ -5,7 +5,7 @@ LendingClub2 Response Order Module
 """
 
 # lendingclub2
-from lendingclub2 import requests
+from lendingclub2 import request
 from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
 from lendingclub2.error import LCError
 from lendingclub2.response import Response
@@ -90,7 +90,7 @@ class Order(Response):
             'aid': investor_id,
             'orders': orders,
         }
-        response = requests.post(self.url, json=payload)
+        response = request.post(self.url, json=payload)
         Response.__init__(self, response)
 
     @property

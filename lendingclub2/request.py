@@ -1,7 +1,7 @@
-# Filename: requests.py
+# Filename: request.py
 
 """
-LendingClub2 Requests Module
+LendingClub2 Request Module
 
 Interface functions:
     get
