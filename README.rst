@@ -8,6 +8,9 @@
 .. image:: https://img.shields.io/pypi/v/lendingclub2.svg
     :target: https://pypi.python.org/pypi/lendingclub2
 
+.. image:: https://img.shields.io/pypi/pyversions/lendingclub2.svg
+    :target: https://pypi.python.org/pypi/lendingclub2
+
 ################
 Lending Club API
 ################
