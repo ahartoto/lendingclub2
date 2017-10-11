@@ -5,6 +5,9 @@
     :target: http://lendingclub2.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
+.. image:: https://img.shields.io/pypi/v/lendingclub2.svg
+    :target: https://pypi.python.org/pypi/lendingclub2
+
 ################
 Lending Club API
 ################
