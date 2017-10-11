@@ -1,6 +1,10 @@
 .. image:: https://travis-ci.org/ahartoto/lendingclub2.svg?branch=master
     :target: https://travis-ci.org/ahartoto/lendingclub2
 
+.. image:: https://readthedocs.org/projects/lendingclub2/badge/?version=latest
+    :target: http://lendingclub2.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 ################
 Lending Club API
 ################
