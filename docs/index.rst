@@ -14,6 +14,9 @@ Welcome to lendingclub2's documentation!
    :caption: Contents:
 
    account
+   authorization
+   filter
+   loan
 
 Indices and tables
 ==================
