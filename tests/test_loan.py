@@ -18,7 +18,7 @@ from lendingclub2.authorization import Authorization
 from lendingclub2.error import LCError
 
 
-class TestListing(object):
+class TestListing:
     def test_search(self):
         try:
             _ = Authorization().key

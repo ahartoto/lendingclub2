@@ -18,7 +18,7 @@ from lendingclub2.error import LCError
 from lendingclub2.response import transfer
 
 
-class TestTransferFund(object):
+class TestTransferFund:
     def test_add(self):
         try:
             investor = InvestorAccount()

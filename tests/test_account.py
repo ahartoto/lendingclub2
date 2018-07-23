@@ -12,7 +12,7 @@ from lendingclub2.account import InvestorAccount
 from lendingclub2.error import LCError
 
 
-class TestInvestorAccount(object):
+class TestInvestorAccount:
     def test_properties(self):
         try:
             investor = InvestorAccount()

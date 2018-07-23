@@ -132,7 +132,7 @@ def withdraw(investor_id, amount):
 
 
 # Interface classes
-class Transaction(object):
+class Transaction:
     """
     Transfer transaction
     """

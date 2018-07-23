@@ -13,7 +13,7 @@ from lendingclub2.config import API_KEY_ENV
 from lendingclub2.error import LCError
 
 
-class Authorization(object):
+class Authorization:
     """
     Get the authorization information
     """

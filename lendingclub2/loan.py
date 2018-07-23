@@ -16,11 +16,11 @@ from lendingclub2.response import Response
 
 
 # Constants
-LISTING_VERSION = '1.2'
+LISTING_VERSION = '1.3'
 
 
 # Interface classes
-class Borrower(object):
+class Borrower:
     """
     Information of the borrower
     """
@@ -164,7 +164,7 @@ class Borrower(object):
         return self._response['empTitle']
 
 
-class Loan(object):
+class Loan:
     """
     Information of each loan
     """
@@ -285,7 +285,7 @@ class Loan(object):
         return self._response['purpose']
 
 
-class Listing(object):
+class Listing:
     """
     Loan listing, which can be used for filtering, and order submission later
     """

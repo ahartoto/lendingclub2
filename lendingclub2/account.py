@@ -20,7 +20,7 @@ from lendingclub2.response.portfolio import Portfolios
 from lendingclub2.response.summary import Summary
 
 
-class InvestorAccount(object):
+class InvestorAccount:
     """
     Representation of an investor account in Lending Club
     """

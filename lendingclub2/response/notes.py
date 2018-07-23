@@ -10,7 +10,7 @@ from lendingclub2.config import API_VERSION, DNS, ENDPOINTS, NoteStatus
 from lendingclub2.response import Response
 
 
-class Note(object):
+class Note:
     """
     Information of a note
     """

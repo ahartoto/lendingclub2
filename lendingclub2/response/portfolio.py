@@ -10,7 +10,7 @@ from lendingclub2.config import API_VERSION, DNS, ENDPOINTS
 from lendingclub2.response import Response
 
 
-class Portfolio(object):
+class Portfolio:
     """
     Get a representation of portfolio
     """

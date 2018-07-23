@@ -13,7 +13,7 @@ from lendingclub2.config import API_KEY_ENV, CONFIG_FPATH, CONFIG_FPATH_ENV
 from lendingclub2.authorization import Authorization
 
 
-class TestAuthAPIEnv(object):
+class TestAuthAPIEnv:
     @classmethod
     def setup_class(cls):
         # Required workaround
@@ -39,7 +39,7 @@ class TestAuthAPIEnv(object):
         assert auth.key == os.getenv(API_KEY_ENV)
 
 
-class TestAuthAPIConfigEnv(object):
+class TestAuthAPIConfigEnv:
     @classmethod
     def setup_class(cls):
         cls.key = 'bar'
@@ -100,7 +100,7 @@ class TestAuthAPIConfigEnv(object):
         assert auth.key == TestAuthAPIConfigEnv.key
 
 
-class TestAuthAPIConfig(object):
+class TestAuthAPIConfig:
     @classmethod
     def setup_class(cls):
         cls.key = 'bar'

@@ -13,7 +13,7 @@ from lendingclub2.error import LCError
 from lendingclub2.response.summary import Summary
 
 
-class TestSummary(object):
+class TestSummary:
     def test_properties(self):
         investor_id = None
         try:

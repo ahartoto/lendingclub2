@@ -13,7 +13,7 @@ from lendingclub2.error import LCError
 from lendingclub2.response.notes import Notes
 
 
-class TestNotes(object):
+class TestNotes:
     def test_properties(self):
         investor_id = None
         try:
