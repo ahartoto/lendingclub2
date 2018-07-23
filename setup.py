@@ -19,9 +19,6 @@ setup(
         'requests>=2.18',
         'six>=1.11.0',
     ],
-    extras_require={
-        ':python_version<"3.4"': ['enum34'],
-    },
     author='Alex Hartoto',
     author_email='ahartoto.dev@gmail.com',
     url='https://github.com/ahartoto/lendingclub2',
@@ -41,7 +38,6 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',

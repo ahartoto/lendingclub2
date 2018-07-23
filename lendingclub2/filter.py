@@ -19,9 +19,9 @@ except ImportError:
     from abc import ABCMeta
     # pylint: enable=unused-import
 
-    # pylint: disable=too-few-public-methods
+    # pylint: disable=too-few-public-methods,no-init
     @six.add_metaclass(ABCMeta)
-    class ABC(object):
+    class ABC:
         """
         Helper class that has ABCMeta as its metaclass.
         """
@@ -96,6 +96,7 @@ class FilterByBorrowerTraits(Filter):
     """
     Filter to have borrower matching specific traits
     """
+    # pylint: disable=super-init-not-called
     def __init__(self, traits):
         """
         Constructor
@@ -111,6 +112,7 @@ class FilterByBorrowerTraits(Filter):
         else:
             fstr = "invalid traits type for {}".format(self.__class__.__name__)
             raise LCError(fstr)
+    # pylint: enable=super-init-not-called
 
     def meet_requirement(self, loan):
         """
@@ -129,6 +131,7 @@ class FilterByFunded(Filter):
     """
     Filter by percentage funded
     """
+    # pylint: disable=super-init-not-called
     def __init__(self, percentage):
         """
         Constructor.
@@ -140,6 +143,7 @@ class FilterByFunded(Filter):
             raise LCError(fstr)
 
         self._percentage = percentage
+    # pylint: enable=super-init-not-called
 
     def meet_requirement(self, loan):
         """
@@ -156,6 +160,7 @@ class FilterByGrade(Filter):
     """
     Filter by grade
     """
+    # pylint: disable=super-init-not-called
     def __init__(self, grades=None):
         """
         Constructor
@@ -163,6 +168,7 @@ class FilterByGrade(Filter):
         :param grades: iterable of string (default: None, example: ('A', 'B'))
         """
         self._grades = grades
+    # pylint: enable=super-init-not-called
 
     def meet_requirement(self, loan):
         """
@@ -180,6 +186,7 @@ class FilterByTerm(Filter):
     """
     Filter by term
     """
+    # pylint: disable=super-init-not-called
     def __init__(self, value=36, min_val=None, max_val=None):
         """
         Constructor. To filter by a specific value, set value to a number.
@@ -211,6 +218,7 @@ class FilterByTerm(Filter):
         self._value = value
         self._min_value = min_val
         self._max_value = max_val
+    # pylint: enable=super-init-not-called
 
     def meet_requirement(self, loan):
         """

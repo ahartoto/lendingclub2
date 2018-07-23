@@ -11,7 +11,7 @@ from lendingclub2.error import LCError
 from lendingclub2.response import Response
 
 
-class OrderNote(object):
+class OrderNote:
     """
     Class to wrap around note to be ordered
     """

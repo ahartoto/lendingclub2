@@ -6,7 +6,7 @@ LendingClub2 Response Package
 from lendingclub2.config import ResponseCode
 
 
-class Response(object):
+class Response:
     """
     Base Response class
     """

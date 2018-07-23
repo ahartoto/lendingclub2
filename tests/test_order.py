@@ -24,7 +24,7 @@ from lendingclub2.filter import (
 from lendingclub2.response.order import Order, OrderNote
 
 
-class TestOrder(object):
+class TestOrder:
     def test_order(self):
         try:
             _ = Authorization().key
