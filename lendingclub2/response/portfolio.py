@@ -14,6 +14,7 @@ class Portfolio:
     """
     Get a representation of portfolio
     """
+
     def __init__(self, investor_id, response=None):
         """
         Constructor
@@ -95,6 +96,7 @@ class Portfolios(Response):
     """
     Get the list of portfolios for a given account
     """
+
     def __init__(self, investor_id):
         """
         Constructor
@@ -107,9 +109,10 @@ class Portfolios(Response):
 
         # Formulate the list of portfolios
         self._list = list()
-        for portfolio_json in self.json['myPortfolios']:
-            self._list.append(Portfolio(self._investor_id,
-                                        response=portfolio_json))
+        if 'myPortfolios' in self.json:
+            for portfolio_json in self.json['myPortfolios']:
+                self._list.append(Portfolio(self._investor_id,
+                                            response=portfolio_json))
 
     def __contains__(self, item):
         """
