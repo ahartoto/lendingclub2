@@ -7,25 +7,7 @@ LendingClub2 Filter Module
 # Standard libraries
 import collections
 from abc import abstractmethod
-
-# Six
-import six
-
-try:
-    from abc import ABC
-except ImportError:
-    # Support for Python version older than 3.4
-    # pylint: disable=unused-import
-    from abc import ABCMeta
-    # pylint: enable=unused-import
-
-    # pylint: disable=too-few-public-methods,no-init
-    @six.add_metaclass(ABCMeta)
-    class ABC:
-        """
-        Helper class that has ABCMeta as its metaclass.
-        """
-    # pylint: enable=too-few-public-methods
+from abc import ABC
 
 
 # lendingclub2
@@ -104,7 +86,7 @@ class FilterByBorrowerTraits(Filter):
                        or iterable of instance of
                        lendingclub2.filter.BorrowerTrait
         """
-        if isinstance(traits, collections.Iterable):
+        if isinstance(traits, collections.abc.Iterable):
             self._specs = traits
         elif isinstance(traits, BorrowerTrait):
             self._specs = (traits, )

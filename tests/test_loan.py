@@ -26,12 +26,12 @@ class TestListing:
             pytest.skip("skip test: cannot find authorization key")
 
         listing = loan.Listing()
-        listing.search()
-        assert isinstance(listing.loans, collections.Iterable)
+        listing.search(show_all=True)
+        assert isinstance(listing.loans, collections.abc.Iterable)
 
         grade = random.choice('ABCDEFG')
         loans = listing.filter(filter.FilterByGrade(grade))
-        assert isinstance(loans, collections.Iterable)
+        assert isinstance(loans, collections.abc.Iterable)
         assert len(loans) >= 0
         for selected_loan in loans:
             assert selected_loan.grade == grade

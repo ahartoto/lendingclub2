@@ -17,7 +17,6 @@ setup(
     packages=['lendingclub2'],
     install_requires=[
         'requests>=2.18',
-        'six>=1.11.0',
     ],
     author='Alex Hartoto',
     author_email='ahartoto.dev@gmail.com',
@@ -35,12 +34,11 @@ setup(
         'Operating System :: MacOS :: MacOS X',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Office/Business :: Financial',
     ],
 )

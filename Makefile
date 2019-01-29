@@ -10,7 +10,7 @@ lint:
 	@$(PYLINT) $(PKG)
 
 test:
-	@$(PYTEST) tests
+	@PYTHONPATH=$(PWD) $(PYTEST) tests
 
 package:
 	@$(PYTHON) setup.py bdist_wheel

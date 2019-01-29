@@ -426,9 +426,12 @@ class Listing:
         # Reset the stored loans whenever we search again as long as the
         # latest request was successful
         self.loans = list()
-        for loan_json in response.json['loans']:
-            loan = Loan(loan_json)
-            self.loans.append(loan)
+        try:
+            for loan_json in response.json['loans']:
+                loan = Loan(loan_json)
+                self.loans.append(loan)
+        except KeyError:
+            pass
 
     def sort(self, by_grade=True, by_term=False):
         """

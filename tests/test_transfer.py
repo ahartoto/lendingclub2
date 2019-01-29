@@ -64,7 +64,7 @@ class TestTransferFund:
             pytest.skip("skip test: can't find account info")
 
         txns = transfer.pending(investor.id())
-        assert isinstance(txns, collections.Iterable)
+        assert isinstance(txns, collections.abc.Iterable)
 
     def test_withdrawal(self):
         try:
