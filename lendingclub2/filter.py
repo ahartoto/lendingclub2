@@ -25,7 +25,6 @@ except ImportError:
         """
         Helper class that has ABCMeta as its metaclass.
         """
-        pass
     # pylint: enable=too-few-public-methods
 
 
