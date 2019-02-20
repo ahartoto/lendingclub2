@@ -18,9 +18,9 @@ Lending Club API
 Welcome to the unofficial Lending Club Python API. This library is inspired by
 the `LendingClub <https://github.com/jgillick/LendingClub>`_ library, but
 utilizes the REST API endpoints and applies the `best practices
-<https://www.lendingclub.com/developers/best-practices.action>`_ from Lending
+<https://www.lendingclub.com/developers/best-practices>`_ from Lending
 Club. For more complete information about Lending Club's REST API, please go
-to `this page <https://www.lendingclub.com/developers/lc-api.action>`_.
+to `this page <https://www.lendingclub.com/developers>`_.
 
 ************
 Requirements
@@ -28,7 +28,7 @@ Requirements
 
 This library expects that the user has pre-generated the Authentication key.
 If you are unfamiliar with it, please go to Lending Club `documentation page
-<https://www.lendingclub.com/developers/authentication.action>`_ to find
+<https://www.lendingclub.com/developers/authentication>`_ to find
 the instructions on how to generate one.
 
 The authentication key can be passed to the application as an environment
