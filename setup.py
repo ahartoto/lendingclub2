@@ -14,6 +14,7 @@ setup(
     version=__version__,
     description='Help automating LendingClub processes',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     packages=['lendingclub2'],
     install_requires=[
         'requests>=2.18',
