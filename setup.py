@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 
+# Standard library
+import re
+
 # setuptools
 from setuptools import setup
 
 # lendingclub2
 from lendingclub2 import __version__
 
-with open('README.rst') as fin:
-    long_description = fin.read()
+# Constants
+IMAGES = re.compile(r'\[.*\]\(http.*\)\n',
+                    flags=re.MULTILINE)
+
+with open('README.md', encoding='utf-8') as fin:
+    long_description = IMAGES.sub('', fin.read())
 
 setup(
     name="lendingclub2",
@@ -17,13 +24,13 @@ setup(
     long_description_content_type='text/markdown',
     packages=['lendingclub2'],
     install_requires=[
-        'requests>=2.18',
+        'requests>=2.21',
     ],
     author='Alex Hartoto',
     author_email='ahartoto.dev@gmail.com',
     url='https://github.com/ahartoto/lendingclub2',
     keywords=['lendingclub', 'lending-club', 'p2p', 'loan', 'api'],
-    license=open('LICENSE').read(),
+    license='MIT',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Console',
