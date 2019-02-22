@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'lendingclub2'
-copyright = '2017, Alex Hartoto'
+copyright = '2017-2019, Alex Hartoto'
 author = 'Alex Hartoto'
 
 # The version info for the project you're documenting, acts as replacement for
