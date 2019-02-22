@@ -22,7 +22,7 @@ from lendingclub2.response.summary import Summary
 
 class InvestorAccount:
     """
-    Representation of an investor account in Lending Club
+    Representation of an investor account in Lending Club.
     """
     _ID = None
 
@@ -37,7 +37,7 @@ class InvestorAccount:
     @classmethod
     def id(cls):
         """
-        Get the account ID
+        Get the account ID.
 
         :returns: string
         """
@@ -56,7 +56,7 @@ class InvestorAccount:
     @property
     def available_balance(self):
         """
-        Get the amount of cash that's available
+        Get the amount of cash that's available.
 
         :returns: float
         """
@@ -65,7 +65,7 @@ class InvestorAccount:
     @property
     def notes(self):
         """
-        Get the notes associated with the account
+        Get the notes associated with the account.
 
         :returns: instance of lendingclub2.response.notes.Notes
         """
@@ -74,7 +74,7 @@ class InvestorAccount:
     @property
     def portfolios(self):
         """
-        Get the portfolios associated with the account
+        Get the portfolios associated with the account.
 
         :returns: instance of lendingclub2.response.portfolio.Portfolios
         """
@@ -83,7 +83,7 @@ class InvestorAccount:
     @property
     def total_balance(self):
         """
-        Get the total balance of the account
+        Get the total balance of the account.
 
         :returns: float
         """
@@ -91,7 +91,7 @@ class InvestorAccount:
 
     def invest(self, *order_notes):
         """
-        Invest to loans as specified
+        Invest to loans as specified.
 
         :param order_notes: iterable of instance of
                             lendingclub2.response.order.OrderNote
