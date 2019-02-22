@@ -20,9 +20,9 @@ from lendingclub2.error import LCError
 # Interface functions
 def get_config_content():
     """
-    Read the configuration file content
+    Read the configuration file content.
 
-    :returns: instance of configparser.ConfigParser
+    :returns: instance of :py:class:`~configparser.ConfigParser`.
     """
     fpath = get_config_fpath()
     if not os.path.exists(fpath):
@@ -37,7 +37,7 @@ def get_config_content():
 
 def get_config_fpath():
     """
-    Get the configuration file path
+    Get the configuration file path.
 
     :returns: string
     """

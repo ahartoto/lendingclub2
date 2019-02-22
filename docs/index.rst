@@ -18,6 +18,15 @@ Welcome to lendingclub2's documentation!
    filter
    loan
 
+Responses used throughout the package:
+
+.. toctree::
+   :maxdepth: 2
+
+   response/notes
+   response/order
+   response/portfolio
+
 Indices and tables
 ==================
 

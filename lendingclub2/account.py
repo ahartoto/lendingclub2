@@ -67,7 +67,7 @@ class InvestorAccount:
         """
         Get the notes associated with the account.
 
-        :returns: instance of lendingclub2.response.notes.Notes
+        :returns: instance of :py:class:`~lendingclub2.response.notes.Notes`.
         """
         return self._notes
 
@@ -76,7 +76,8 @@ class InvestorAccount:
         """
         Get the portfolios associated with the account.
 
-        :returns: instance of lendingclub2.response.portfolio.Portfolios
+        :returns: instance of
+                  :py:class:`~lendingclub2.response.portfolio.Portfolios`.
         """
         return self._portfolios
 
@@ -94,7 +95,7 @@ class InvestorAccount:
         Invest to loans as specified.
 
         :param order_notes: iterable of instance of
-                            lendingclub2.response.order.OrderNote
+                            :py:class:`~lendingclub2.response.order.OrderNote`.
         """
         order = Order(self.id(), *order_notes)
         if not order.successful:

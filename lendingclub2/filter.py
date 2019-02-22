@@ -24,7 +24,7 @@ class BorrowerTrait(ABC):
         """
         Check if borrower has the trait
 
-        :param borrower: instance of lendingclub2.loan.Borrower
+        :param borrower: instance of :py:class:`~lendingclub2.loan.Borrower`.
         :returns: boolean
         """
         return True
@@ -38,7 +38,7 @@ class BorrowerEmployedTrait(BorrowerTrait):
         """
         Check if borrower has the trait
 
-        :param borrower: instance of lendingclub2.loan.Borrower
+        :param borrower: instance of :py:class:`~lendingclub2.loan.Borrower`.
         :returns: boolean
         """
         return borrower.employed
@@ -53,7 +53,7 @@ class Filter(ABC):
         """
         Check if the loan is meeting the filter requirement
 
-        :param loan: instance of lendingclub2.loan.Loan
+        :param loan: instance of :py:class:`~lendingclub2.loan.Loan`.
         :returns: boolean
         """
         return True
@@ -67,7 +67,7 @@ class FilterByApproved(Filter):
         """
         Check if the loan is meeting the filter requirement
 
-        :param loan: instance of lendingclub2.loan.Loan
+        :param loan: instance of :py:class:`~lendingclub2.loan.Loan`.
         :returns: boolean
         """
         return loan.approved
@@ -82,9 +82,10 @@ class FilterByBorrowerTraits(Filter):
         """
         Constructor
 
-        :param traits: instance of lendingclub2.filter.BorrowerTrait
+        :param traits: instance of
+                       :py:class:`~lendingclub2.filter.BorrowerTrait`
                        or iterable of instance of
-                       lendingclub2.filter.BorrowerTrait
+                       :py:class:`~lendingclub2.filter.BorrowerTrait`.
         """
         if isinstance(traits, collections.abc.Iterable):
             self._specs = traits
@@ -99,7 +100,7 @@ class FilterByBorrowerTraits(Filter):
         """
         Check if the loan is meeting the filter requirement
 
-        :param loan: instance of lendingclub2.loan.Loan
+        :param loan: instance of :py:class:`~lendingclub2.loan.Loan`.
         :returns: boolean
         """
         for spec in self._specs:
@@ -131,7 +132,7 @@ class FilterByFunded(Filter):
         The loan would have to be at least the percentage value to meet the
         requirement.
 
-        :param loan: instance of lendingclub2.loan.Loan
+        :param loan: instance of :py:class:`~lendingclub2.loan.Loan`.
         :returns: boolean
         """
         return loan.percent_funded >= self._percentage
@@ -155,7 +156,7 @@ class FilterByGrade(Filter):
         """
         Check if the loan is meeting the filter requirement
 
-        :param loan: instance of lendingclub2.loan.Loan
+        :param loan: instance of :py:class:`~lendingclub2.loan.Loan`.
         :returns: boolean
         """
         if self._grades and loan.grade in self._grades:
@@ -205,7 +206,7 @@ class FilterByTerm(Filter):
         """
         Check if the loan is meeting the filter requirement
 
-        :param loan: instance of lendingclub2.loan.Loan
+        :param loan: instance of :py:class:`~lendingclub2.loan.Loan`.
         :returns: boolean
         """
         if self._value is not None:
