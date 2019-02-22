@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PyPI release version](https://img.shields.io/pypi/v/lendingclub2.svg)](https://pypi.python.org/pypi/lendingclub2/)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/lendingclub2.svg)](https://pypi.python.org/pypi/lendingclub2/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/lendingclub2.svg)](https://pypi.python.org/pypi/lendingclub2/)
 
 # Lending Club API
 
