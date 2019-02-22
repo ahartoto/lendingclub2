@@ -4,7 +4,7 @@
 import re
 
 # setuptools
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # lendingclub2
 from lendingclub2 import __version__
@@ -22,7 +22,7 @@ setup(
     description='Help automating LendingClub processes',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    packages=['lendingclub2'],
+    packages=find_packages(),
     install_requires=[
         'requests>=2.21',
     ],
