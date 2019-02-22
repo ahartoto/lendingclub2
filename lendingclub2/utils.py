@@ -22,7 +22,7 @@ def get_config_content():
     """
     Read the configuration file content.
 
-    :returns: instance of :py:class:`~configparser.ConfigParser`.
+    :returns: instance of :py:class:`configparser.ConfigParser`.
     """
     fpath = get_config_fpath()
     if not os.path.exists(fpath):

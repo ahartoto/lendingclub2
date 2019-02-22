@@ -26,11 +26,11 @@ __LAST_REQUEST_TIMESTAMP = None
 # pylint: disable=global-statement
 def get(*args, **kwargs):
     """
-    Wrapper around requests.get function.
+    Wrapper around :py:func:`requests.get` function.
 
-    :param args: tuple - positional arguments for requests.get
-    :param kwargs: dict - keyword arguments for requests.get
-    :returns: instance of requests.Response
+    :param args: tuple - positional arguments for :py:func:`requests.get`.
+    :param kwargs: dict - keyword arguments for :py:func:`requests.get`.
+    :returns: instance of :py:class:`requests.Response`.
     """
     global __LAST_REQUEST_TIMESTAMP
     __add_headers_to_kwargs(kwargs)
@@ -48,11 +48,11 @@ def get(*args, **kwargs):
 # pylint: disable=global-statement
 def post(*args, **kwargs):
     """
-    Wrapper around requests.post function.
+    Wrapper around :py:func:`requests.post` function.
 
-    :param args: tuple - positional arguments for requests.post
-    :param kwargs: dict - keyword arguments for requests.post
-    :returns: instance of requests.Response
+    :param args: tuple - positional arguments for :py:func:`requests.post`.
+    :param kwargs: dict - keyword arguments for :py:func:`requests.post`.
+    :returns: instance of :py:class:`requests.Response`.
     """
     global __LAST_REQUEST_TIMESTAMP
     __add_headers_to_kwargs(kwargs)
@@ -70,7 +70,7 @@ def post(*args, **kwargs):
 # Internal functions
 def __add_headers_to_kwargs(kwargs):
     """
-    Add authorization key to the headers in keyword arguments
+    Add authorization key to the headers in keyword arguments.
 
     :param kwargs: dict
     """
@@ -85,7 +85,7 @@ def __add_headers_to_kwargs(kwargs):
 def __wait_request():
     """
     Ensure that we are not violating the requirements on sending request
-    at the correct rate
+    at the correct rate.
     """
     if __LAST_REQUEST_TIMESTAMP is None:
         return
