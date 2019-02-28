@@ -27,7 +27,7 @@ class OrderNote:
         if amount <= 0:
             fstr = "amount should be a positive number"
             raise LCError(fstr)
-        elif amount % 25 != 0:
+        if amount % 25 != 0:
             fstr = "amount needs to be a multiple of $25"
             raise LCError(fstr)
 

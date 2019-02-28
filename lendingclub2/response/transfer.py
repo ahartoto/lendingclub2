@@ -42,7 +42,7 @@ def add(investor_id, amount, frequency=TransferFrequency.NOW,
             hint = "start_date needs to be specified for future or recurring " \
                    "transfer"
             raise LCError(fstr, hint=hint)
-        elif not isinstance(start_date, datetime.datetime):
+        if not isinstance(start_date, datetime.datetime):
             fstr = "start_date parameter needs to be an instance of datetime"
             raise LCError(fstr)
 
