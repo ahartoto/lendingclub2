@@ -255,7 +255,7 @@ class Loan:
 
         :returns: float (0.0 - 100.0)
         """
-        return self._response['inRate']
+        return self._response['intRate']
 
     @property
     def investor_count(self):
