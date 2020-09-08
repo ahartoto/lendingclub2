@@ -41,7 +41,7 @@ def get(*args, **kwargs):
         return response
     except requests.ConnectionError as exc:
         fstr = "Cannot connect correctly"
-        raise LCError(fstr, details=str(exc))
+        raise LCError(fstr) from exc
 # pylint: enable=global-statement
 
 
@@ -63,7 +63,7 @@ def post(*args, **kwargs):
         return response
     except requests.ConnectionError as exc:
         fstr = "Cannot connect correctly"
-        raise LCError(fstr, details=str(exc))
+        raise LCError(fstr) from exc
 # pylint: enable=global-statement
 
 

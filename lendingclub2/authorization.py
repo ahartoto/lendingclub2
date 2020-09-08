@@ -34,7 +34,7 @@ class Authorization:
                 Authorization._CODE = config['access']['api_key']
             except KeyError as exc:
                 fstr = "configuration file doesn't have info about api_key"
-                raise LCError(fstr, hint=str(exc))
+                raise LCError(fstr) from exc
 
     @property
     def key(self):

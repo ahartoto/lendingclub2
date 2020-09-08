@@ -50,7 +50,7 @@ class InvestorAccount:
                     cls._ID = config['account']['investor_id']
                 except KeyError as exc:
                     fstr = "cannot find the information of the investor ID"
-                    raise LCError(fstr, hint=str(exc))
+                    raise LCError(fstr) from exc
         return cls._ID
 
     @property
